@@ -1,4 +1,4 @@
-NAME		=	main
+NAME		=	RPN
 
 CXX			=	c++
 
@@ -6,7 +6,7 @@ CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 
 
 #source files
-SRC_FILES	=	main.cpp Span.cpp
+SRC_FILES	=	main.cpp
 
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
