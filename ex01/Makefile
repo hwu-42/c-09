@@ -22,12 +22,12 @@ all: $(NAME)
 
 #compile the executable
 $(NAME): $(OBJ)
-	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 #compile objects
 $(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
-	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
 
 #clean rule
 clean:

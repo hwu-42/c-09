@@ -1,4 +1,4 @@
-NAME		=	main
+NAME		=	btc
 
 CXX			=	c++
 
@@ -6,7 +6,7 @@ CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 
 
 #source files
-SRC_FILES	=	main.cpp
+SRC_FILES	=	main.cpp BitcoinExchange.cpp
 
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
@@ -22,12 +22,12 @@ all: $(NAME)
 
 #compile the executable
 $(NAME): $(OBJ)
-	@$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 #compile objects
 $(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
-	@mkdir -p $(OBJ_DIR)
-	@$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
 
 #clean rule
 clean:

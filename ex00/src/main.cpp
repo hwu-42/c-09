@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     }
 
     try {
-        BitcoinExchange btc("bitcoin_prices.csv"); // Replace with your actual CSV file
+        BitcoinExchange btc("../../data.csv"); // Replace with your actual CSV file
         btc.processInputFile(argv[1]);
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
