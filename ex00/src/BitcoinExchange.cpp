@@ -5,29 +5,50 @@
 #include <stdexcept>
 #include <limits>
 
+BitcoinExchange::BitcoinExchange() {}
+
+BitcoinExchange::~BitcoinExchange() {}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other) {
+    database = other.database;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
+    if (this != &other) {
+        database = other.database;
+    }
+    return *this;
+}
+
 BitcoinExchange::BitcoinExchange(const std::string& dbFile) {
     loadDatabase(dbFile);
 }
 
 void BitcoinExchange::loadDatabase(const std::string& dbFile) {
-    std::ifstream file(dbFile);
+    std::ifstream file(dbFile.c_str());
     if (!file.is_open()) {
         throw std::runtime_error("Error: could not open file " + dbFile);
     }
-
     std::string line;
+    std::getline(file, line); // Skip the header
     while (std::getline(file, line)) {
         std::istringstream ss(line);
         std::string date, priceStr;
         if (std::getline(ss, date, ',') && std::getline(ss, priceStr)) {
-            float price = std::stof(priceStr);
+            std::stringstream ss(priceStr);
+            float price;
+            ss >> price;
+            if (ss.fail()) {
+                // Handle the error if the conversion fails
+                throw std::runtime_error("Invalid float format in string: " + priceStr);
+            }
             database[date] = price; // Insert into map
         }
     }
 }
 
 float BitcoinExchange::getExchangeRate(const std::string& date) const {
-    auto it = database.lower_bound(date);
+    std::map<std::string, float>::const_iterator it = database.lower_bound(date);
     if (it == database.end() || it->first != date) {
         if (it != database.begin()) --it; // Go to the closest lower date
         else throw std::runtime_error("Error: no valid date found in the database.");
@@ -43,21 +64,36 @@ bool BitcoinExchange::isValidDate(const std::string& date) const {
 
 bool BitcoinExchange::isValidValue(const std::string& valueStr, float& value) const {
     try {
-        value = std::stof(valueStr);
-        return value >= 0 && value <= 1000;
+        std::stringstream ss(valueStr);
+        ss >> value;
+
+        if (ss.fail()) {
+            // Handle invalid float format
+            return false;
+        }
+        if (value < 0) {
+            std::cerr << "Error: negative value." << std::endl;
+            return false;
+        }
+        if (value > 1000) {
+            std::cerr << "Error: too large a number." << std::endl;
+            return false;
+        }
+        return true;
     } catch (...) {
         return false;
     }
 }
 
 void BitcoinExchange::processInputFile(const std::string& inputFile) const {
-    std::ifstream file(inputFile);
+    std::ifstream file(inputFile.c_str());
     if (!file.is_open()) {
         std::cerr << "Error: could not open file." << std::endl;
         return;
     }
 
     std::string line;
+    std::getline(file, line); // Skip the header
     while (std::getline(file, line)) {
         std::istringstream ss(line);
         std::string date, valueStr;
@@ -73,7 +109,7 @@ void BitcoinExchange::processInputFile(const std::string& inputFile) const {
 
             float value;
             if (!isValidValue(valueStr, value)) {
-                std::cerr << "Error: not a positive number." << std::endl;
+                //std::cerr << "Error: not a positive number." << std::endl;
                 continue;
             }
 
