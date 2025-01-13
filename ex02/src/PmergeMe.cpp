@@ -1,9 +1,5 @@
-#include "PmergeMe.hpp"
-#include <algorithm>
-#include <stdexcept>
-#include <sstream>
-#include <iostream>
-#include <ctime>
+#include "../include/PmergeMe.hpp"
+
 
 PmergeMe::PmergeMe() {
     num = 0;
@@ -42,6 +38,19 @@ void PmergeMe::fillNumbers(int n) {
             --i;
             continue;
         }
+        numbersv.push_back(temp);
+        numbersl.push_back(temp);
+    }
+}
+
+void PmergeMe::loadNumbers(int argc, char* argv[]) {
+    int temp;
+    for (int i = 1; i < argc; ++i) {
+        if (!stringToInt(argv[i], temp)) {
+            throw std::invalid_argument("Invalid input: " + std::string(argv[i]));
+        }
+        if (std::find(numbersv.begin(), numbersv.end(), temp) != numbersv.end())
+            throw std::invalid_argument("Duplicate input: " + std::string(argv[i]));
         numbersv.push_back(temp);
         numbersl.push_back(temp);
     }

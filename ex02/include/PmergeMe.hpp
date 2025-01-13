@@ -3,6 +3,13 @@
 #include <vector>
 #include <list>
 #include <string>
+#include "utility.h"
+#include "PmergeMe.hpp"
+#include <algorithm>
+#include <stdexcept>
+#include <sstream>
+#include <iostream>
+#include <ctime>
 
 class PmergeMe {
 private:
@@ -26,4 +33,5 @@ public:
     void sortList(std::list<int>& numbers);
 
     static bool validateInput(const std::string& input);
+    void loadNumbers(int argc, char* argv[]);
 };
