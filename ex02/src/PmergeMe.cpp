@@ -31,11 +31,13 @@ int PmergeMe::get_num() {
 void PmergeMe::sortVector() {
     // Implement Ford-Johnson for vector
     std::cout << "Implement Ford-Johnson for vector\n";
+    fjsortv(numbersv, num);
 }
 
 void PmergeMe::sortList() {
     // Implement Ford-Johnson for list
     std::cout << "Implement Ford-Johnson for list\n";
+    fjsortl(numbersl, num);
 }
 
 /*

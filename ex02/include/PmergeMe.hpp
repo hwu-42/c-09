@@ -10,15 +10,16 @@
 #include <sstream>
 #include <iostream>
 #include <ctime>
+#include "fjsort.h"
 
 class PmergeMe {
 private:
-    int num;
+    long unsigned int num;
     std::vector<int> numbersv;
     std::list<int> numbersl;
 
-    void merge(std::vector<int>& numbers, std::vector<int>& left, std::vector<int>& right);
-    void merge(std::list<int>& numbers, std::list<int>& left, std::list<int>& right);
+    //void merge(std::vector<int>& numbers, std::vector<int>& left, std::vector<int>& right);
+    //void merge(std::list<int>& numbers, std::list<int>& left, std::list<int>& right);
 public:
     PmergeMe();
     ~PmergeMe();

@@ -11,3 +11,4 @@
 #include <ctime>
 
 bool stringToInt(const std::string& str, int& result);
+bool isSorted(std::list<int>& numbers);
