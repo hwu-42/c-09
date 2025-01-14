@@ -23,15 +23,18 @@ public:
     PmergeMe();
     ~PmergeMe();
 
+    void printNumbers() const;
+
     void fillNumbers(int n);
 
     PmergeMe(const PmergeMe& other);
     PmergeMe& operator=(const PmergeMe& other);
 
+    int get_num();
 
-    void sortVector(std::vector<int>& numbers);
-    void sortList(std::list<int>& numbers);
+    void sortVector();
+    void sortList();
 
-    static bool validateInput(const std::string& input);
+    //static bool validateInput(const std::string& input);
     void loadNumbers(int argc, char* argv[]);
 };

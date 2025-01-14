@@ -34,30 +34,32 @@ int main(int argc, char* argv[]) {
         }
     }
 
-        std::cout << "Before: " << sorter << "\n"; working on here
+    std::cout << "Before:\n";
+    sorter.printNumbers();
+    std::cout << std::endl;
 
 
-
+    try {
         // Sort using vector
         clock_t startVec = clock();
-        sorter.sortVector(vec);
+        sorter.sortVector();
         clock_t endVec = clock();
 
         // Sort using list
         clock_t startList = clock();
-        sorter.sortList(lst);
+        sorter.sortList();
         clock_t endList = clock();
 
-        std::cout << "After: ";
-        for (const int& num : vec) std::cout << num << " ";
+        std::cout << "After:\n";
+        sorter.printNumbers();
         std::cout << "\n";
 
         double timeVec = static_cast<double>(endVec - startVec) / CLOCKS_PER_SEC;
         double timeList = static_cast<double>(endList - startList) / CLOCKS_PER_SEC;
 
-        std::cout << "Time to process a range of " << vec.size() 
+        std::cout << "Time to process a range of " << sorter.get_num() 
                   << " elements with std::vector: " << timeVec << "s\n";
-        std::cout << "Time to process a range of " << lst.size() 
+        std::cout << "Time to process a range of " << sorter.get_num() 
                   << " elements with std::list: " << timeList << "s\n";
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << "\n";
