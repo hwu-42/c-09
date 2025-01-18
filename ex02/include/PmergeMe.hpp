@@ -11,6 +11,7 @@
 #include <iostream>
 #include <ctime>
 #include "fjsort.h"
+#include "common.h"
 
 class PmergeMe {
 private:
