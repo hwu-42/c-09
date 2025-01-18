@@ -52,7 +52,7 @@ void PmergeMe::fillNumbers(int n) {
     int temp;
     num = n;
     for (int i = 0; i < n; ++i) {
-        temp = rand();
+        temp = rand() % num;
         if (std::find(numbersv.begin(), numbersv.end(), temp) != numbersv.end()) {
             --i;
             continue;

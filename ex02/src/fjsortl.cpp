@@ -2,66 +2,41 @@
 
 #include "../include/fjsort.h"
 
-
-/*void insert_mainchain(std::list<int>& small, std::list<int>& big) {
-    std::list<int>::iterator it = small.begin();
-    for (long unsigned int i = 0; i < small.size(); ++i) {
-        if (*it < big.front()) {
-            big.push_front(*it);
-        }
-    }}
-// Implement Ford-Johnson for list
-void fjsortl(std::list<int>& numbers, long unsigned int n) {
-    if (isSorted(numbers)) {
-        return;
-    }
-    std::cout << "Implement Ford-Johnson for list\n";
-    std::list<int> big, small;
-    std::list<int>::iterator it = numbers.begin();
-    for (long unsigned int i = 0; i < n / 2; ++i) {
-        int a = *it;
-        int b = *(++it);
-        big.push_back(std::max(a, b));
-        small.push_back(std::min(a, b));
-        ++it;
-    }
-    if (n % 2 == 1) {
-        small.push_back(*it);
-    }
-    fjsortl(big, big.size());
-    insert_mainchain(small, big); // insert unsorted small into sorted big
-}*/
-
-
-
 int binary_sort(std::list<int>& numbers, long unsigned int n, int odd[32]) {
     int round = 0;
     int lenth;
     while (n > 1) {
         lenth = power(2, round);
-        std::list<int>::iterator it = numbers.begin();
+        LI it1start = numbers.begin();
+        LI it1end = advancen(it1start, lenth - 1);
+        LI it2start = advancen(it1end, 1);
+        LI it2end = advancen(it2start, lenth - 1);
+        LI it3start = advancen(it2end, 1);
         for (long unsigned int i = 0; i < n / 2; ++i) {
-            int a = *it;
-            int b = *(++it);
-            if (a > b) {
-                std::swap(a, b);
-            }
-            *it = a;
-            *(++it) = b;
-            ++it;
+            if (*it1end > *it2end)
+                numbers.splice(it1start, numbers, it2start, it3start);
+            it1start = it3start;
+            it1end = advancen(it1start, lenth - 1);
+            it2start = advancen(it1end, 1);
+            it2end = advancen(it2start, lenth - 1);
+            it3start = advancen(it2end, 1);
         }
-        if (n % 2 == 1) {
-            odd[round] = *it;
-        }
+        if (n % 2 == 1)
+            odd[round] = 1;
+        else
+            odd[round] = 0;
         n = n / 2;
         ++round;
     }
-
     return round;
 }
 
-void insert_mainchain(std::list<int>& numbers, std::list<int>& mainchain) {
+void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
     std::cout << "Insert mainchain\n";
+    (void)numbers;
+    (void)mainchain;
+    (void)round;
+    (void)odd;
 }
 
 void fjsortl(std::list<int>& numbers, long unsigned int n) {
@@ -70,7 +45,13 @@ void fjsortl(std::list<int>& numbers, long unsigned int n) {
     }
     int odd[32];
     std::cout << "Implement Ford-Johnson for list\n";
-    binary_sort(numbers , n, odd);
+    int round = binary_sort(numbers , n, odd);
+    std::cout << "round: " << round << std::endl;
+    std::cout << "odd: ";
+    for (int i = 0; i < round; ++i) {
+        std::cout << odd[i] << " ";
+    }
+    std::cout << std::endl;
     std::list<int> mainchain;
-    insert_mainchain(numbers, mainchain); // insert unsorted small into sorted big
+    insert_mainchain(numbers, mainchain, round, odd); // insert unsorted small into sorted big
 }

@@ -15,3 +15,8 @@ bool stringToInt(const std::string& str, int& result);
 bool isSorted(std::list<int>& numbers);
 int power(int b, int a);
 void    printList(const std::string message, std::list<int> & l);
+
+template <typename Iterator>
+Iterator advancen(Iterator it, int steps);
+
+#include "advancen.tpp"

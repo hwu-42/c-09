@@ -3,13 +3,7 @@
 
 
 // Helper function to advance an iterator by a given number of steps
-template <typename Iterator>
-Iterator advance(Iterator it, int steps) {
-    while (steps-- > 0) {
-        ++it;
-    }
-    return it;
-}
+
 
 
 
