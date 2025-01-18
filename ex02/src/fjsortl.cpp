@@ -33,7 +33,9 @@ int binary_sort(std::list<int>& numbers, long unsigned int n, int odd[32]) {
 
 void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
     std::cout << "Insert mainchain\n";
-    (void)numbers;
+    Jacobsthal ja(numbers.size());
+    ja.printNumbers();
+    std::cout << std::endl;    
     (void)mainchain;
     (void)round;
     (void)odd;

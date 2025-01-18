@@ -6,7 +6,7 @@ CXXFLAGS	=	-Wall -Werror -Wextra -std=c++98
 
 
 #source files
-SRC_FILES	=	main.cpp PmergeMe.cpp utility.cpp fjsortl.cpp fjsortv.cpp
+SRC_FILES	=	main.cpp PmergeMe.cpp utility.cpp fjsortl.cpp fjsortv.cpp JacobsthalSerie.cpp
 
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
