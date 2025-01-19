@@ -134,7 +134,7 @@ void insertLeftlumps(Vector& numbers, Vector& mainchain, int lump, int lenth, Ja
 void insert_mainchain(Vector& numbers, Vector& mainchain, int round, int odd[32]) {
     round--;
     Jacobsthal ja(numbers.size());
-    ja.printPace();
+    //ja.printPace();
     int lenth;
     int lump = 1;
     VI it1start;

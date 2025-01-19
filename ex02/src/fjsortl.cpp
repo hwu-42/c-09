@@ -87,7 +87,7 @@ void insertLeftlumps(List& numbers, List& mainchain, int lump, int lenth, Jacobs
 void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
     round--;
     Jacobsthal ja(numbers.size());
-    ja.printPace();
+    //ja.printPace();
     int lenth;
     int lump = 1;
     LI it1start;
