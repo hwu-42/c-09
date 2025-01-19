@@ -20,6 +20,7 @@ Jacobsthal::Jacobsthal(int max) : numbers(), it(numbers.end()), pace(), pi(pace.
     }
     reset(); // Initialize the iterator to the start
     it++;
+    it++;
     int i = *it;
     it++;
     for (; it != numbers.end(); ++it) {
@@ -90,7 +91,7 @@ void Jacobsthal::resetPace() {
 }
 
 void Jacobsthal::printPace() const {
-    std::cout << "Pace: ";
+    std::cout << "Paces: ";
     std::list<int>::const_iterator it = pace.begin();
     for (; it != pace.end(); ++it) {
         std::cout << *it << " ";

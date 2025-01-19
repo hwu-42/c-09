@@ -19,4 +19,7 @@ void    printList(const std::string message, std::list<int> & l);
 template <typename Iterator>
 Iterator advancen(Iterator it, int steps);
 
+template <typename Iterator>
+Iterator backn(Iterator it, int steps);
+
 #include "advancen.tpp"
