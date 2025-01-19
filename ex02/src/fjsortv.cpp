@@ -4,7 +4,7 @@
 
 
 
-void splicev(Vector& mainchain, VI position, Vector& numbers, VI itstart, VI itend) {
+/*void splicev(Vector& mainchain, VI position, Vector& numbers, VI itstart, VI itend) {
     // Check if the range is valid
     if (itstart == itend) {
         return; // Nothing to splice if the range is empty
@@ -20,7 +20,7 @@ void splicev(Vector& mainchain, VI position, Vector& numbers, VI itstart, VI ite
     mainchain.insert(position, temp.begin(), temp.end());
 }
 
-/*void splicev(Vector& mainchain, VI position, Vector& numbers) {
+void splicev(Vector& mainchain, VI position, Vector& numbers) {
     // Step 1: Create a temporary vector to store the elements to be spliced
     Vector temp(numbers.begin(), numbers.end());
 
@@ -143,7 +143,7 @@ void insert_mainchain(Vector& numbers, Vector& mainchain, int round, int odd[32]
     //int end1;
     int i = 0;
     for (;round > -1; round--) {
-        std::cout << "round: " << round << "***********************" << std::endl;
+        //std::cout << "round: " << round << "***********************" << std::endl;
         i = 0;
         lenth = power(2, round);
         int lumpleft = lump - 1 + odd[round];//this is the number of unsorted lumps left after moving sorted lumps to mainchain
@@ -163,23 +163,23 @@ void insert_mainchain(Vector& numbers, Vector& mainchain, int round, int odd[32]
             numbers.erase(it1start, it1end);
             i++;
         }
-        std::cout << "round: " << round << std::endl;
-        std::cout << "lenth: " << lenth << std::endl;
-        std::cout << "lump: " << lump << std::endl;
-        std::cout << "after move sorted to mainchain: " << std::endl;
-        printVector("mainchain:\n", mainchain);
-        printVector("numbers:\n", numbers);
+        //std::cout << "round: " << round << std::endl;
+        //std::cout << "lenth: " << lenth << std::endl;
+        //std::cout << "lump: " << lump << std::endl;
+        //std::cout << "after move sorted to mainchain: " << std::endl;
+        //printVector("mainchain:\n", mainchain);
+        //printVector("numbers:\n", numbers);
         insertLeftlumps(numbers, mainchain, lumpleft, lenth, ja); 
         ja.resetPace();
-        std::cout << "after insert left lumps: " << std::endl;
-        printVector("mainchain:\n", mainchain);
-        printVector("numbers:\n", numbers);
+        //std::cout << "after insert left lumps: " << std::endl;
+        //printVector("mainchain:\n", mainchain);
+        //printVector("numbers:\n", numbers);
         //splicev(numbers, numbers.begin(), mainchain);
         numbers.insert(numbers.begin(), mainchain.begin(), mainchain.end());
         mainchain.clear();
-        std::cout << "after move back numbers: " << std::endl;
-        printVector("mainchain:\n", mainchain);
-        printVector("numbers:\n", numbers);
+        //std::cout << "after move back numbers: " << std::endl;
+        //printVector("mainchain:\n", mainchain);
+        //printVector("numbers:\n", numbers);
     }
 }
 
@@ -188,19 +188,19 @@ void fjsortv(std::vector<int>& numbers, long unsigned int n) {
         return;
     }
     int odd[32];
-    std::cout << "Implement Ford-Johnson for vector\n";
+    //std::cout << "Implement Ford-Johnson for vector\n";
     int round = binary_sort_vector(numbers , n, odd);
-    std::cout << "round: " << round << std::endl;
-    std::cout << "odd: ";
-    for (int i = 0; i < round; ++i) {
+    //std::cout << "round: " << round << std::endl;
+    //std::cout << "odd: ";
+    /*for (int i = 0; i < round; ++i) {
         std::cout << odd[i] << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "after binary_sort:\n";
-    for (VI it = numbers.begin(); it != numbers.end(); ++it) {
+    }*/
+    //std::cout << std::endl;
+    //std::cout << "after binary_sort:\n";
+    /*for (VI it = numbers.begin(); it != numbers.end(); ++it) {
         std::cout << *it << " ";
     }
-    std::cout << std::endl;
+    std::cout << std::endl;*/
     std::vector<int> mainchain;
     insert_mainchain(numbers, mainchain, round, odd); // insert unsorted small into sorted big
 }

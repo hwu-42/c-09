@@ -32,7 +32,7 @@ int binary_sort(std::list<int>& numbers, long unsigned int n, int odd[32]) {
 }
 
 void binaryInsert(List& mainchain, List& numbers, LI it1start, LI it1end, int lenth) {
-    std::cout << "binaryInsert:\nit1start: " << *it1start << " it1end: " << *it1end << std::endl;
+    //std::cout << "binaryInsert:\nit1start: " << *it1start << " it1end: " << *it1end << std::endl;
     LI it = mainchain.begin();
     int l = mainchain.size();
     int lump = l / lenth - 1;
@@ -94,7 +94,7 @@ void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
     LI it1end;
     int i = 0;
     for (;round > -1; round--) {
-        std::cout << "round: " << round << "***********************" << std::endl;
+        //std::cout << "round: " << round << "***********************" << std::endl;
         i = 1;
         lenth = power(2, round);
         int lumpleft = lump - 1 + odd[round];//this is the number of unsorted lumps left after moving sorted lumps to mainchain
@@ -110,21 +110,21 @@ void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
                 mainchain.splice(mainchain.end(), numbers, it1start, it1end);
             i++;
         }
-        std::cout << "round: " << round << std::endl;
-        std::cout << "lenth: " << lenth << std::endl;
-        std::cout << "lump: " << lump << std::endl;
-        std::cout << "after move soted to mainchain: " << std::endl;
-        printList("mainchain:\n", mainchain);
-        printList("numbers:\n", numbers);
+        //std::cout << "round: " << round << std::endl;
+        //std::cout << "lenth: " << lenth << std::endl;
+        //std::cout << "lump: " << lump << std::endl;
+        //std::cout << "after move soted to mainchain: " << std::endl;
+        //printList("mainchain:\n", mainchain);
+        //printList("numbers:\n", numbers);
         insertLeftlumps(numbers, mainchain, lumpleft, lenth, ja); 
         ja.resetPace();
-        std::cout << "after insert left lumps: " << std::endl;
-        printList("mainchain:\n", mainchain);
-        printList("numbers:\n", numbers);
+        //std::cout << "after insert left lumps: " << std::endl;
+        //printList("mainchain:\n", mainchain);
+        //printList("numbers:\n", numbers);
         numbers.splice(numbers.begin(), mainchain);
-        std::cout << "after move back numbers: " << std::endl;
-        printList("mainchain:\n", mainchain);
-        printList("numbers:\n", numbers);
+        //std::cout << "after move back numbers: " << std::endl;
+        //printList("mainchain:\n", mainchain);
+        //printList("numbers:\n", numbers);
     }
 }
 
@@ -133,18 +133,18 @@ void fjsortl(std::list<int>& numbers, long unsigned int n) {
         return;
     }
     int odd[32];
-    std::cout << "Implement Ford-Johnson for list\n";
+    //std::cout << "Implement Ford-Johnson for list\n";
     int round = binary_sort(numbers , n, odd);
-    std::cout << "round: " << round << std::endl;
-    std::cout << "odd: ";
-    for (int i = 0; i < round; ++i) {
+    //std::cout << "round: " << round << std::endl;
+    //std::cout << "odd: ";
+    /*for (int i = 0; i < round; ++i) {
         std::cout << odd[i] << " ";
     }
-    std::cout << "after binary_sort:\n";
+    //std::cout << "after binary_sort:\n";
     for (LI it = numbers.begin(); it != numbers.end(); ++it) {
         std::cout << *it << " ";
-    }
-    std::cout << std::endl;
+    }*/
+    //std::cout << std::endl;
     std::list<int> mainchain;
     insert_mainchain(numbers, mainchain, round, odd); // insert unsorted small into sorted big
 }
