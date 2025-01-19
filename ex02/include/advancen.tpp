@@ -7,3 +7,11 @@ Iterator advancen(Iterator it, int steps) {
     }
     return it;
 }
+
+template <typename Iterator>
+Iterator backn(Iterator it, int steps) {
+    while (steps-- > 0) {
+        --it;
+    }
+    return it;
+}
