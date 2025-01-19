@@ -31,18 +31,37 @@ int binary_sort(std::list<int>& numbers, long unsigned int n, int odd[32]) {
     return round;
 }
 
-void binaryInsert(List& mainchain, List& numbers, LI it1start, LI it1end) {
-    LI it2start = mainchain.begin();
-    LI it2end = advancen(it2start, 1);
-    while (it2end != mainchain.end()) {
-        if (*it1start < *it2start) {
-            mainchain.splice(it2start, numbers, it1start, it1end);
-            return;
-        }
-        it2start = it2end;
-        it2end = advancen(it2start, 1);
+void binaryInsert(List& mainchain, List& numbers, LI it1start, LI it1end, int lenth) {
+    std::cout << "binaryInsert:\nit1start: " << *it1start << " it1end: " << *it1end << std::endl;
+    LI it = mainchain.begin();
+    int l = mainchain.size();
+    int lump = l / lenth - 1;
+    int i;
+    int start = 0;
+    int end = lump;
+    it1end--;
+    int value = *it1end;
+    it1end++;
+    if (value < *advancen(it, lenth - 1)) {
+        mainchain.splice(it, numbers, it1start, it1end);
+        return;
     }
-    mainchain.splice(mainchain.end(), numbers, it1start, it1end);
+    if (value > *(--mainchain.end())) {
+        mainchain.splice(mainchain.end(), numbers, it1start, it1end);
+        return;
+    }
+    
+    LI itm;
+    while (end - start > 1) {
+        i = (start + end) / 2;
+        itm = advancen(it, i * lenth + lenth - 1);
+        if (value < *itm)
+            end = i;
+        else
+            start = i;
+    }
+    it = advancen(it, end * lenth);
+    mainchain.splice(it, numbers, it1start, it1end);
 }
 
 void insertLeftlumps(List& numbers, List& mainchain, int lump, int lenth, Jacobsthal& ja) {
@@ -54,7 +73,7 @@ void insertLeftlumps(List& numbers, List& mainchain, int lump, int lenth, Jacobs
         LI it1start = advancen(numbers.begin(), (i - 1) * lenth);
         LI it1end = advancen(it1start, lenth);
         while (true) {
-            binaryInsert(mainchain, numbers, it1start, it1end);
+            binaryInsert(mainchain, numbers, it1start, it1end, lenth);
             i--;
             lump--;
             if (i == 0)
@@ -67,8 +86,6 @@ void insertLeftlumps(List& numbers, List& mainchain, int lump, int lenth, Jacobs
 
 void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
     round--;
-    
-    //std::cout << "Insert mainchain\n";
     Jacobsthal ja(numbers.size());
     ja.printPace();
     int lenth;
@@ -76,21 +93,8 @@ void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
     LI it1start;
     LI it1end;
     int i = 0;
-    //ja.printNumbers();
-    //std::cout << std::endl;
-    //ja.printPace();
-    //std::cout << std::endl;
-        /*LI it1start = numbers.begin();
-        LI it1end = advancen(it1start, lenth);
-        std::cout << "it1start1: " << *it1start << " it1end: " << *it1end << std::endl;
-        mainchain.splice(mainchain.begin(), numbers, it1start, it1end);
-        std::cout << "it1start2: " << *it1start << " it1end: " << *it1end << std::endl;
-        printList("mainchain:\n", mainchain);
-        printList("numbers:\n", numbers);
-        it1start = advancen(numbers.begin(),lenth);
-        it1end = advancen(it1start, lenth);*/
-
-    //for (;round > -1; round--) {
+    for (;round > -1; round--) {
+        std::cout << "round: " << round << "***********************" << std::endl;
         i = 1;
         lenth = power(2, round);
         int lumpleft = lump - 1 + odd[round];//this is the number of unsorted lumps left after moving sorted lumps to mainchain
@@ -121,15 +125,7 @@ void insert_mainchain(List& numbers, List& mainchain, int round, int odd[32]) {
         std::cout << "after move back numbers: " << std::endl;
         printList("mainchain:\n", mainchain);
         printList("numbers:\n", numbers);
-    //}
-    (void)mainchain;
-    (void)round;
-    (void)odd;
-    (void)lump;
-    (void)lenth;
-    (void)it1start;
-    (void)it1end;
-    (void)lumpleft;
+    }
 }
 
 void fjsortl(std::list<int>& numbers, long unsigned int n) {
