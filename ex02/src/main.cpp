@@ -34,10 +34,9 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    std::cout << "Before:\n";
+    std::cout << "Before sorting:\n";
     sorter.printNumbers();
     std::cout << std::endl;
-
 
     try {
         // Sort using vector

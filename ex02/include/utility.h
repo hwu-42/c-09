@@ -13,8 +13,10 @@
 
 bool stringToInt(const std::string& str, int& result);
 bool isSorted(std::list<int>& numbers);
+bool isSorted(std::vector<int>& numbers);
 int power(int b, int a);
 void    printList(const std::string message, std::list<int> & l);
+void    printVector(const std::string message, std::vector<int> & l);
 
 template <typename Iterator>
 Iterator advancen(Iterator it, int steps);
